@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>موقعي</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+    color: white;
+}
+
+/* زر البداية */
+#startBtn {
+    background: white;
+    color: black;
+    padding: 15px 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+/* الحاوية */
+#container {
+    display: none;
+    text-align: center;
+}
+
+/* الخانات */
+.box {
+    background: white;
+    color: black;
+    margin: 10px;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/* الصور */
+img {
+    margin-top: 10px;
+    width: 200px;
+    display: none;
+    border-radius: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<button id="startBtn"> برك هنا ضغيا</button>
+
+<div id="container">
+
+    <!-- الخانة 1 -->
+    <div class="box" onclick="document.getElementById('file1').click()">
+         شوف هاذي
+        <br>
+        <img id="img1">
+    </div>
+    <input type="file" id="file1" accept="image/*" style="display:none">
+
+    <!-- الخانة 2 -->
+    <div class="box" onclick="document.getElementById('file2').click()">
+         زيد تا هاذي
+        <br>
+        <img id="img2">
+    </div>
+    <input type="file" id="file2" accept="image/*" style="display:none">
+
+    <!-- الخانة 3 -->
+    <div class="box" onclick="document.getElementById('file3').click()">
+         أخر وحدة
+        <br>
+        <img id="img3">
+    </div>
+    <input type="file" id="file3" accept="image/*" style="display:none">
+
+</div>
+
+<script>
+
+// إظهار القائمة
+document.getElementById("startBtn").onclick = function() {
+    this.style.display = "none";
+    document.getElementById("container").style.display = "block";
+};
+
+// دالة عرض الصورة
+function loadImage(input, imgId) {
+    let file = input.files[0];
+    if (!file) return;
+
+    let reader = new FileReader();
+
+    reader.onload = function(e) {
+        let img = document.getElementById(imgId);
+        img.src = e.target.result;
+        img.style.display = "block";
+    };
+
+    reader.readAsDataURL(file);
+}
+
+// ربط كل input بالصورة
+document.getElementById("file1").onchange = function() {
+    loadImage(this, "img1");
+};
+
+document.getElementById("file2").onchange = function() {
+    loadImage(this, "img2");
+};
+
+document.getElementById("file3").onchange = function() {
+    loadImage(this, "img3");
+};
+
+</script>
+
+</body>
+</html>
